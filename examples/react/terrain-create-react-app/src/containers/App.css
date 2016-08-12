@@ -60,6 +60,9 @@
 body {
     font-family: Raleway, sans-serif;
     background-color: #eee;
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
 }
 
 a {
@@ -151,6 +154,12 @@ button.disabled {
     pointer-events: none;
     cursor: default;
     opacity: 0.5;
+}
+
+button.enabled {
+  pointer-events: all;
+  cursor: pointer;
+  opacity: 1;
 }
 
 button:hover {

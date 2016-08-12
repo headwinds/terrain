@@ -8,42 +8,41 @@ export class TerrainViewController {
 
         let langUtil = new LanguageUtil();
 
-        function runif(lo, hi) {
-            return lo + Math.random() * (hi - lo);
-        }
-
-        var rnorm = (function () {
-            var z2 = null;
-            function rnorm() {
-                if (z2 != null) {
-                    var tmp = z2;
-                    z2 = null;
-                    return tmp;
-                }
-                var x1 = 0;
-                var x2 = 0;
-                var w = 2.0;
-                while (w >= 1) {
-                    x1 = runif(-1, 1);
-                    x2 = runif(-1, 1);
-                    w = x1 * x1 + x2 * x2;
-                }
-                w = Math.sqrt(-2 * Math.log(w) / w);
-                z2 = x2 * w;
-                return x1 * w;
-            }
-            return rnorm;
-        })();
-
-        function randomVector(scale) {
-            return [scale * rnorm(), scale * rnorm()];
-        }
-
         var defaultExtent = {
             width: 1,
             height: 1
         };
 
+        function runif(lo, hi) {
+            return lo + Math.random() * (hi - lo);
+        }
+
+        var z2 = null;
+
+        function rnorm() {
+            if (z2 != null) {
+                var tmp = z2;
+                z2 = null;
+                return tmp;
+            }
+            var x1 = 0;
+            var x2 = 0;
+            var w = 2.0;
+            while (w >= 1) {
+                x1 = runif(-1, 1);
+                x2 = runif(-1, 1);
+                w = x1 * x1 + x2 * x2;
+            }
+            w = Math.sqrt(-2 * Math.log(w) / w);
+            z2 = x2 * w;
+            return x1 * w;
+        }
+
+        function randomVector(scale) {
+            return [scale * rnorm(), scale * rnorm()];
+        }
+
+       
         function getDefaultExtent(){
             return defaultExtent;
         }
@@ -146,8 +145,6 @@ export class TerrainViewController {
             }
             return mesh;
         }
-
-
 
         function generateGoodMesh(n, extent) {
             extent = extent || defaultExtent;
@@ -684,6 +681,7 @@ export class TerrainViewController {
             newpath.push(path[path.length - 1]);
             return newpath;
         }
+
         function visualizePoints(svg, pts) {
             var circle = svg.selectAll('circle').data(pts);
             circle.enter()
@@ -1047,6 +1045,7 @@ export class TerrainViewController {
                 .raise();
 
         }
+        
         function drawMap(svg, render) {
             
             render.rivers = getRivers(render.h, 0.01);
