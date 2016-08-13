@@ -1,7 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import * as d3 from "d3";
 
-
 import { TerrainViewController } from './TerrainViewController.js';
 
 export default class Terrain extends Component {
@@ -10,8 +9,9 @@ export default class Terrain extends Component {
         super(props, context);
 
        this.state = {
-            map: ["foo"],
-            message: "Generated Map"
+            map: ["default"],
+            message: "Generated Map",
+            saved: false,
         }
     }
  
@@ -32,31 +32,25 @@ export default class Terrain extends Component {
     }
 
     componentDidMount(){
-         this.drawTerrain(); 
+        this.drawTerrain(); 
 
-         let store = this.props.store;
+        let store = this.props.store;
 
+        console.log("Terrain componentDidMount state: ", this.state);
 
-         console.log("Terrain componentDidMount state: ", this.state);
+        let self = this;
 
-         let self = this;
-
-         let handleChange = function(){
+        let handleChange = function(){
 
              let state = store.getState();
-
              console.log("Terrain handleChange state: ", state);
 
              let message = "Generated Another Random Map";
 
              self.setState({message}); 
+        }
 
-         }
-
-
-
-
-         store.subscribe(handleChange)
+        store.subscribe(handleChange)
     } 
 
     componentWillMount() {
@@ -68,9 +62,6 @@ export default class Terrain extends Component {
     }
 
     componentDidUpdate(){
-
-
-        
 
         //let state = getState(); 
 
@@ -90,8 +81,6 @@ export default class Terrain extends Component {
             margin: "0 auto"
           } 
         }
-
-        
 
         return (
                 <div>

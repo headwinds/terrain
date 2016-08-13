@@ -2,7 +2,8 @@ import React, { Component, PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import * as MapActions from '../actions/MapActions';
+import * as TerrainActions from '../actions/TerrainActions';
+import * as ToolsActions from '../actions/ToolsActions';
 
 import Header from './header/Header';
 import Tools from './tools/Tools';
@@ -11,18 +12,27 @@ import Terrain from '../components/terrain/Terrain';
 import './App.css';
 
 class App extends Component {
+
+  constructor(props, context){
+    super(props,context)
+
+    this.state = {
+      mapGenerated: false,
+    }
+
+  }
   
   render() {
     
-    const { actions, store } = this.props;
+    const { toolsActions, terrainActions, store } = this.props;
 
     console.log("App store: ", this.props.store);
     
     return (
        <div className="App">
         <Header ref="header"/>
-        <Tools actions={actions} ref="tools"/>
-        <Terrain store={store} actions={actions} ref="terrain"/>
+        <Tools actions={toolsActions} ref="tools"/>
+        <Terrain store={store} actions={terrainActions} ref="terrain"/>
       </div>
     );
   }
@@ -30,7 +40,7 @@ class App extends Component {
 }
 
 App.propTypes = {
-  actions: PropTypes.object.isRequired
+  
 };
 
 function mapStateToProps(state) {
@@ -41,7 +51,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(MapActions, dispatch)
+    terrainActions: bindActionCreators(TerrainActions, dispatch),
+    toolsActions: bindActionCreators(ToolsActions, dispatch)
   };
 }
 

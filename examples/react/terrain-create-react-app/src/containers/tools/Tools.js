@@ -6,7 +6,9 @@ export default class Tools extends Component {
 		super(props, context);
 
 		this.state = {
-			map: ["hello"]
+			map: ["hello"],
+			activeTool: "none",
+			mapName: "default"
 		}
 	}
 
@@ -29,7 +31,7 @@ export default class Tools extends Component {
 	onGenerateClick(){
 		console.log("Tools onGenerateClick ", this);
 
-		let newMap = "world";
+		let newMap = this.state.mapName;
 
 		//generateRandomMap(state = 0, action, map)
 		this.props.actions.dispatchGenerateRandomMap(newMap);
@@ -47,6 +49,10 @@ export default class Tools extends Component {
 
 	}
 
+	onMapNameChangeHandler(){
+		
+	}
+
 	render() {
 		return(
 			<div className="toolsContainer">
@@ -54,6 +60,9 @@ export default class Tools extends Component {
 				<button className="enabled" onClick={() => {this.onGenerateClick();}}>Generate</button>
 				<button className="disabled" onClick={() => {this.onSaveClick();}}>Save</button>
 				<button className="disabled" onClick={() => {this.onExportClick();}}>Export</button>
+
+				<label>Map Name: </label>
+				<input value={this.state.mapName} onChange={() => {this.onMapNameChangeHandler();}} />
 			</div>
 		);
 	}

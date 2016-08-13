@@ -1,13 +1,11 @@
-import { GENERATE_RANDOM_MAP } from '../constants/ActionTypes';
+import { types } from '../constants/ToolsActionTypes';
 
-export default function generateRandomMap(state = ["hello"], action) {
+export default function dispatchGenerateRandomMap(state = false, action) {
   switch (action.type) {
-  case GENERATE_RANDOM_MAP:
-  	console.log("ToolsReducers - GENERATE_RANDOM_MAP - state: ", state, action);
-    
-  	// notify the map needs to be generated
-
-    return state.concat(action.mapName);
+  case types.GENERATE_RANDOM_MAP:
+  	console.log("ToolsReducers - dispatchGenerateRandomMap - state: ", state, action);
+ 
+    return true;
   default:
     return state;
   }
