@@ -10,21 +10,50 @@ export default class Terrain extends Component {
     constructor(props, context){
         super(props, context);
 
+        this.store = this.props.store;
+
         this.state = {
-            map: ["default"],
-            message: "Message here....",
-            messageVisible: false,
+            message: "Please Wait... Generating Random Map",
+            messageVisible: true,
             saved: false,
+            generatingMap: false,
+            mapComplete: false,
         }
+
+        let store = this.store;
+
+        console.log("Terrain constructor: ", this.state);
+
+        this.onChangeHandler = this.onChangeHandler.bind(this);
+        //this.componentDidUpdate = this.componentDidUpdate.bind(this);
+
+        store.subscribe(this.onChangeHandler);
+    }
+
+    onChangeHandler(){
+
+        let self = this;
+
+        let appState = self.store.getState();
+        let terrainState = appState.terrainState;    
+        
+        console.log("Terrain handleChange terrainState: ", terrainState);
+
+        if ( terrainState.mapComplete ) terrainState.messageVisible = false;
+            
+        self.setState(terrainState);
+
+
     }
 
     draw(){
-        this.toggleMessage("Please Wait... Generating Random Map");
-
+       
         this.drawTerrain();
     }
  
     drawTerrain( id ){
+
+        let self = this;
 
         setTimeout( () => {
 
@@ -36,7 +65,7 @@ export default class Terrain extends Component {
                                                         .attr("width", "100%")
                                                         .attr("height", "100%");
 
-            let terrain = new TerrainViewController();        
+            let terrain = new TerrainViewController( self.store );        
             let defaultParams = terrain.getDefaultParams(); 
             terrain.doMap( svg, defaultParams); // feels like this should be moved to a web worker since it takes 4-5 seconds... 
 
@@ -44,41 +73,12 @@ export default class Terrain extends Component {
 
     }
 
-    toggleMessage( message ){
-
-        this.setState({ messageVisible: true, message: message });
-
-        setTimeout( () => {
-
-            this.setState({ messageVisible: false });
-
-        }, 4000);
-    }
-
     componentDidMount(){
 
+        console.log("Terrain componentDidMount")
+
         this.draw();
-        
-        let store = this.props.store;
-
-        console.log("Terrain componentDidMount state: ", this.state);
-
-        let self = this;
-
-        let handleChange = function(){
-
-             let state = store.getState();
-             console.log("Terrain handleChange arguments: ", arguments);
-             console.log("Terrain handleChange state: ", state);
-
-             let message = "Generated Another Random Map";
-
-             self.draw();
-        }
-
-        store.subscribe(handleChange);
-
-        
+       
     } 
 
     componentWillMount() {
@@ -91,8 +91,14 @@ export default class Terrain extends Component {
 
     componentDidUpdate(){
 
-        console.log("Terrain componentDidUpdate state: ", this.state);
+        //console.log("Terrain componentDidUpdate state: ", this.state);
 
+        let appState = this.store.getState();
+        let terrainState = appState.terrainState; 
+
+        console.log("Terrain componentDidUpdate terrainState: ", terrainState);
+
+        if (terrainState.generatingMap && !terrainState.mapComplete) this.draw();
 
     }    
 

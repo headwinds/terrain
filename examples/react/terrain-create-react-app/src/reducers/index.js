@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 
-import toolsReducers from './ToolsReducers';
-import terrainReducers from './TerrainReducers';
+import toolsState from './ToolsReducers';
+import terrainState from './TerrainReducers';
 
 /**
  * combineReducers is important to understand. As your app might grow in size
@@ -17,8 +17,8 @@ import terrainReducers from './TerrainReducers';
  * More info: http://rackt.org/redux/docs/api/combineReducers.html
  */
 const rootReducer = combineReducers({
-  toolsReducers, // you might be used to: counter: counter,
-  terrainReducers,
+  toolsState, // you might be used to: counter: counter,
+  terrainState,
 });
 
 export default rootReducer;

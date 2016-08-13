@@ -10,6 +10,8 @@ export default class Tools extends Component {
 			activeTool: "none",
 			mapName: "default"
 		}
+
+		this.store = this.props.store;
 	}
 
 	componentWillMount() {
@@ -22,23 +24,22 @@ export default class Tools extends Component {
 
     componentDidUpdate(){
         
-
         //let state = getState(); 
 
-        console.log("Tools componentDidUpdate state: ", this.state);
+        //console.log("Tools componentDidUpdate state: ", this.state);
     }  
 
 	onGenerateClick(){
-		console.log("Tools onGenerateClick ", this);
+		//console.log("Tools onGenerateClick ", this);
 
 		let newMap = this.state.mapName;
 
 		//generateRandomMap(state = 0, action, map)
 		this.props.actions.dispatchGenerateRandomMap(newMap);
 
-		let map = this.state.map.concat(newMap);
+		//let map = this.state.map.concat(newMap);
 
-		this.setState({ map });
+		//this.setState({ map });
 	}
 
 	onSaveClick(){

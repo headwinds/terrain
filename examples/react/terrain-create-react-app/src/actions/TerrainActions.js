@@ -1,18 +1,18 @@
 import { types } from '../constants/TerrainActionTypes';
 
-export function randomMapGeneratedAction() {
+export function startGeneratingMapAction() {
   return {
-    type: types.RANDOM_MAP_GENERATED,
+    type: types.RANDOM_MAP_START,
   };
 }
 
-export function randomMapGenerated() {
+export function startGeneratingMap() {
   return (dispatch, getState) => {
     
     //const { map } = getState();
-    console.log("TerrainActions  randomMapGenerated");
+    console.log("TerrainActions  startGeneratingMap");
 
-    let action = randomMapGeneratedAction();
+    let action = startGeneratingMapAction();
 
     dispatch( action );
 

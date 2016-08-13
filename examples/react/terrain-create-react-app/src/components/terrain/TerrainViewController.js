@@ -1,12 +1,15 @@
 import * as d3 from "d3";
 
 import { LanguageUtil } from './LanguageUtil.js';
+import { types } from '../../constants/TerrainActionTypes.js';
 
 export class TerrainViewController {
 
-    constructor(){
+    constructor( store ){
 
         let langUtil = new LanguageUtil();
+
+        this.store = store;
 
         var defaultExtent = {
             width: 1,
@@ -1075,6 +1078,12 @@ export class TerrainViewController {
             render.h = params.generator(params);
             placeCities(render);
             drawMap(svg, render);
+
+            let action = { type: types.RANDOM_MAP_COMPLETE };
+
+            this.store.dispatch( action );
+
+
         }
 
         var defaultParams = {

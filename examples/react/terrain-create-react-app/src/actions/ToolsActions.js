@@ -2,7 +2,7 @@ import { types } from '../constants/ToolsActionTypes';
 
 export function generateRandomMapAction( mapName ) {
   return {
-    type: types.GENERATE_RANDOM_MAP,
+    type: types.RANDOM_MAP_START,
     mapName: mapName,
   };
 }

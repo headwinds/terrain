@@ -8,14 +8,15 @@ var initialState = {
   */
   toolsState: {
   	map: ["hello"],
-	activeTool: "none",
-	mapName: "default"
+  	activeTool: "none",
+  	mapName: "default"
   },
   terrainState: {
-  	map: ["default"],
-    message: "Message here....",
-    messageVisible: false,
+    message: "Please Wait... Generating Random Map",
+    messageVisible: true,
     saved: false,
+    generatingMap: false,
+    mapComplete: false,
   }
 };
 

@@ -31,7 +31,7 @@ class App extends Component {
     return (
        <div className="App">
         <Header ref="header"/>
-        <Tools actions={toolsActions} ref="tools"/>
+        <Tools store={store} actions={toolsActions} ref="tools"/>
         <Terrain store={store} actions={terrainActions} ref="terrain"/>
       </div>
     );
