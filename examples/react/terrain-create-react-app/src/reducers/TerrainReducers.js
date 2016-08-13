@@ -1,13 +1,23 @@
-import { GENERATE_RANDOM_MAP } from '../constants/TerrainActionTypes';
+import { types } from '../constants/TerrainActionTypes';
 
-export default function generateRandomMap(state = false, action) {
+const initialState = {
+	map: ["default"],
+    message: "Message here....",
+    messageVisible: false,
+    saved: false,
+    generatingMap: false,
+};
+
+export default function generateRandomMap(state = initialState, action) {
   switch (action.type) {
-  case GENERATE_RANDOM_MAP:
+  
+  case types.RANDOM_MAP_GENERATED:
   	console.log("TerrainReducers - generateRandomMap - state: ", state, action);
 
   	// generate the map
 
-    return true;
+    return { ...state, generatingMap: false };
+  
   default:
     return state;
   }

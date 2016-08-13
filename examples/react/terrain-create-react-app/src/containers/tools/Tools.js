@@ -56,7 +56,7 @@ export default class Tools extends Component {
 	render() {
 		return(
 			<div className="toolsContainer">
-				<p className="cominsoon">Tools - coming soons - would include:</p>
+				<p className="cominsoon">Tools</p>
 				<button className="enabled" onClick={() => {this.onGenerateClick();}}>Generate</button>
 				<button className="disabled" onClick={() => {this.onSaveClick();}}>Save</button>
 				<button className="disabled" onClick={() => {this.onExportClick();}}>Export</button>

@@ -138,6 +138,7 @@ export class TerrainViewController {
                 edges: edges,
                 extent: extent
             }
+            
             mesh.map = function (f) {
                 var mapped = vxs.map(f);
                 mapped.mesh = mesh;
