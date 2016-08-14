@@ -35,7 +35,7 @@ export default class Tools extends Component {
 		let newMap = this.state.mapName;
 
 		//generateRandomMap(state = 0, action, map)
-		this.props.actions.dispatchGenerateRandomMap(newMap);
+		this.props.actions.generateRandomMapToolCommand(newMap);
 
 		//let map = this.state.map.concat(newMap);
 

@@ -2,12 +2,12 @@ import { types } from '../constants/ToolsActionTypes';
 
 export function generateRandomMapAction( mapName ) {
   return {
-    type: types.RANDOM_MAP_START,
+    type: types.TOOL_GENERATE_RANDOM_MAP,
     mapName: mapName,
   };
 }
 
-export function dispatchGenerateRandomMap( mapName ) {
+export function generateRandomMapToolCommand( mapName ) {
   return (dispatch, getState) => {
     
     //const { map } = 

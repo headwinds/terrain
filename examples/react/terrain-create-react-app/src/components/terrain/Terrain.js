@@ -65,9 +65,14 @@ export default class Terrain extends Component {
                                                         .attr("width", "100%")
                                                         .attr("height", "100%");
 
-            let terrain = new TerrainViewController( self.store );        
-            let defaultParams = terrain.getDefaultParams(); 
-            terrain.doMap( svg, defaultParams); // feels like this should be moved to a web worker since it takes 4-5 seconds... 
+            let terrain = new TerrainViewController( self.props.actions );        
+            let defaultParams = terrain.getDefaultParams();
+
+            let width = 800;
+            let height = width;
+
+
+            terrain.doMap( svg, defaultParams, width, height); // feels like this should be moved to a web worker since it takes 4-5 seconds... 
 
         }, 500 );
 

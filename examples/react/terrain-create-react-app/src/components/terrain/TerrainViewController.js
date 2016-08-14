@@ -1,15 +1,15 @@
 import * as d3 from "d3";
 
 import { LanguageUtil } from './LanguageUtil.js';
-import { types } from '../../constants/TerrainActionTypes.js';
+
 
 export class TerrainViewController {
 
-    constructor( store ){
+    constructor( actions ){
 
         let langUtil = new LanguageUtil();
 
-        this.store = store;
+        this.actions = actions;
 
         var defaultExtent = {
             width: 1,
@@ -44,12 +44,7 @@ export class TerrainViewController {
         function randomVector(scale) {
             return [scale * rnorm(), scale * rnorm()];
         }
-
-       
-        function getDefaultExtent(){
-            return defaultExtent;
-        }
-
+        
         function generatePoints(n, extent) {
             extent = extent || defaultExtent;
             var pts = [];
@@ -875,8 +870,6 @@ export class TerrainViewController {
             var nterrs = render.params.nterrs;
             var avoids = [render.rivers, render.coasts, render.borders];
 
-            var langUtil = new LanguageUtil();
-            
             var lang = langUtil.makeRandomLanguage();
 
             var citylabels = [];
@@ -1064,12 +1057,17 @@ export class TerrainViewController {
             drawLabels(svg, render);
         }
 
-        function doMap(svg, params) {
+        function doMap(svg, params, width, height) {
+            
             var render = {
                 params: params
             };
-            var width = svg.attr('width');
-            svg.attr('height', width * params.extent.height / params.extent.width);
+
+            let newHeight = width * params.extent.height / params.extent.width;
+
+            console.log("TerranViewController newHeight: ", newHeight);
+            svg.attr('height', newHeight);
+            
             svg.attr('viewBox', -1000 * params.extent.width/2 + ' ' + 
                                 -1000 * params.extent.height/2 + ' ' + 
                                 1000 * params.extent.width + ' ' + 
@@ -1079,10 +1077,7 @@ export class TerrainViewController {
             placeCities(render);
             drawMap(svg, render);
 
-            let action = { type: types.RANDOM_MAP_COMPLETE };
-
-            this.store.dispatch( action );
-
+            this.actions.mapCompleteCommand();
 
         }
 

@@ -11,7 +11,14 @@ const initialState = {
 
 export default function generateRandomMap(state = initialState, action) {
   switch (action.type) {
-  
+
+    case types.TOOL_GENERATE_RANDOM_MAP:
+      console.log("TerrainReducers - TOOL_GENERATE_RANDOM_MAP - state: ", state, action);
+
+      // the app has started to generate the map
+
+      return { ...state, generatingMap: true, mapComplete: false, messageVisible: true, message: "Please Wait... Generating Random Map" };
+
     case types.RANDOM_MAP_START:
     	console.log("TerrainReducers - RANDOM_MAP_START - state: ", state, action);
 
